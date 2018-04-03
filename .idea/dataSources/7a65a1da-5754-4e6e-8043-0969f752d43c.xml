@@ -11,78 +11,96 @@
     <collation id="5" parent="1" name="RTRIM"/>
     <table id="6" parent="2" name="link"/>
     <table id="7" parent="2" name="linkwords"/>
-    <table id="8" parent="2" name="sqlite_master">
+    <table id="8" parent="2" name="pagerank"/>
+    <table id="9" parent="2" name="sqlite_master">
       <System>1</System>
     </table>
-    <table id="9" parent="2" name="urllist"/>
-    <table id="10" parent="2" name="wordlist"/>
-    <table id="11" parent="2" name="wordlocation"/>
-    <column id="12" parent="6" name="fromid">
+    <table id="10" parent="2" name="urllist"/>
+    <table id="11" parent="2" name="wordlist"/>
+    <table id="12" parent="2" name="wordlocation"/>
+    <column id="13" parent="6" name="fromid">
       <Position>1</Position>
       <DataType>integer|0</DataType>
     </column>
-    <column id="13" parent="6" name="toid">
+    <column id="14" parent="6" name="toid">
       <Position>2</Position>
       <DataType>integer|0</DataType>
     </column>
-    <index id="14" parent="6" name="urlfromidx">
+    <index id="15" parent="6" name="urlfromidx">
       <ColNames>fromid</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <index id="15" parent="6" name="urltoidx">
+    <index id="16" parent="6" name="urltoidx">
       <ColNames>toid</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <column id="16" parent="7" name="wordid">
+    <column id="17" parent="7" name="wordid">
       <Position>1</Position>
     </column>
-    <column id="17" parent="7" name="linkid">
+    <column id="18" parent="7" name="linkid">
       <Position>2</Position>
     </column>
-    <column id="18" parent="8" name="type">
+    <column id="19" parent="8" name="urlid">
+      <Position>1</Position>
+    </column>
+    <column id="20" parent="8" name="score">
+      <Position>2</Position>
+    </column>
+    <index id="21" parent="8" name="sqlite_autoindex_pagerank_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>urlid</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="22" parent="8">
+      <ColNames>urlid</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_pagerank_1</UnderlyingIndexName>
+    </key>
+    <column id="23" parent="9" name="type">
       <Position>1</Position>
       <DataType>text|0</DataType>
     </column>
-    <column id="19" parent="8" name="name">
+    <column id="24" parent="9" name="name">
       <Position>2</Position>
       <DataType>text|0</DataType>
     </column>
-    <column id="20" parent="8" name="tbl_name">
+    <column id="25" parent="9" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0</DataType>
     </column>
-    <column id="21" parent="8" name="rootpage">
+    <column id="26" parent="9" name="rootpage">
       <Position>4</Position>
       <DataType>integer|0</DataType>
     </column>
-    <column id="22" parent="8" name="sql">
+    <column id="27" parent="9" name="sql">
       <Position>5</Position>
       <DataType>text|0</DataType>
     </column>
-    <column id="23" parent="9" name="url">
+    <column id="28" parent="10" name="url">
       <Position>1</Position>
     </column>
-    <index id="24" parent="9" name="urlidx">
+    <index id="29" parent="10" name="urlidx">
       <ColNames>url</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <column id="25" parent="10" name="word">
+    <column id="30" parent="11" name="word">
       <Position>1</Position>
     </column>
-    <index id="26" parent="10" name="wordidx">
+    <index id="31" parent="11" name="wordidx">
       <ColNames>word</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <column id="27" parent="11" name="urlid">
+    <column id="32" parent="12" name="urlid">
       <Position>1</Position>
     </column>
-    <column id="28" parent="11" name="wordid">
+    <column id="33" parent="12" name="wordid">
       <Position>2</Position>
     </column>
-    <column id="29" parent="11" name="location">
+    <column id="34" parent="12" name="location">
       <Position>3</Position>
     </column>
-    <index id="30" parent="11" name="wordurlidx">
+    <index id="35" parent="12" name="wordurlidx">
       <ColNames>wordid</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
