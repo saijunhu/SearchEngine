@@ -3,6 +3,8 @@ import certifi
 import re
 from bs4 import BeautifulSoup
 import sqlite3
+import src.nn
+mynet = src.nn.searchnet('nn.db')
 
 
 # Create a list of words to ignore
@@ -221,7 +223,8 @@ class seacher:
         # this func is amazing !!!!!, good example for weight sth
         weights=[(0.6, self.frequencys_score(rows)),(0.2, self.locations_scores(rows)),
                  (0.2,self.distance_score(rows)), (0.3, self.inbund_link_store(rows)),
-                 (0.6, self.pagerank_score(rows)), (0.5, self.linktext_score(rows,wordids))]
+                 (0.6, self.pagerank_score(rows)), (0.5, self.linktext_score(rows,wordids)),
+                 (0.6, self.nn_score(rows,wordids)) ]
         for (weight,scores) in weights:
             for url in totalscores:
                 totalscores[url]+=weight*scores[url]
@@ -297,12 +300,21 @@ class seacher:
                     linkscores[toid]+=pr
         return self.normalize_scores(linkscores)
 
+    # Score method seven: use the neutral network
+    def nn_score(self, rows, wordids):
+        urlids = [urlid for urlid in set([row[0] for row in rows])]
+        mynet.generate_hidden_node(wordids,urlids) # try
+        nnres = mynet.get_result(wordids,urlids)
+        scores = dict([(urlids[i],nnres[i]) for i in range(len(urlids))])
+        return self.normalize_scores(scores)
+
     def query(self, q,resultsize=10):
         rows, wordids = self.get_match_rows(q)
         scores = self.get_sorted_list(rows,wordids)
         rankedscores = sorted([(score, url) for (url, score) in scores.items()], reverse=True)
         for (score, urlid) in rankedscores[0:resultsize]:
             print('%f\t%s' % (score, self.get_url_name(urlid)))
+        return wordids,[r[1] for r in rankedscores]
 
 
 
